@@ -1,0 +1,214 @@
+﻿@model ImageUpload.Blogger
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Write Your Post Here..</h2>
+@using (Html.BeginForm("Create", "Bloggers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <link href="~/Content/Style.css" rel="stylesheet" />
+
+
+    <div class="container1">
+
+
+        <form method="post" action="">
+            <div class="form-group" style="font-size:large;color:black">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            
+
+            <div class="form-group" style="font-size:large;color:black">
+                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Nightmare",
+                            Value = "NightMare"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Dream",
+                            Value = "Dream",
+                            Selected = true
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Trauma",
+                            Value = "Trauma"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Memory",
+                            Value = "Memory"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Wish",
+                            Value = "Wish"
+                        });
+                    }
+
+                    @Html.DropDownListFor(model => model.Category, listItems)
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-group" style="font-size:large;color:black">
+                @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="file" id="file" /><br><br>
+                    @Html.ValidationMessageFor(model => model.ImagePath)
+                </div>
+            </div>
+            <br />
+
+
+
+            <div class="form-group" style="font-size:large;color:black">
+                @Html.LabelFor(model => model.Post, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Post, htmlAttributes: new { cols = 35, @rows = 3, @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Post, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-group" style="font-size:large;color:black">
+                @Html.LabelFor(model => model.PostedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PostedBy, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PostedBy, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <input type="submit" value="Create"><br /><br /><br />
+            <button style="height:50px;width:100px;margin-left:15px;color:green">@Html.ActionLink("Back to list", "Index") </button>
+
+        </form>
+    </div>
+
+
+
+    @*@using (Html.BeginForm("Create", "Bloggers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="form-horizontal">
+                <h4>Blogger</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+
+                        @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Nightmare",
+                                Value = "NightMare"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Dream",
+                                Value = "Dream",
+                                Selected = true
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Trauma",
+                                Value = "Trauma"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Memory",
+                                Value = "Memory"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Wish",
+                                Value = "Wish"
+                            });
+                        }
+
+                        @Html.DropDownListFor(model => model.Category, listItems)
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Post, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Post, new { htmlAttributes = new { @class = "form-control", } })
+                        @Html.ValidationMessageFor(model => model.Post, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PostedBy, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PostedBy, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PostedBy, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input type="file" name="file" id="file" /><br><br>
+                        @Html.ValidationMessageFor(model => model.ImagePath)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
